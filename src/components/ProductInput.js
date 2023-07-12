@@ -2,28 +2,27 @@ import { useRef, useState } from "react";
 import { postProduct } from "../api/productAPI";
 
 const initState = {
-    title:'',
-    content:'',
-    writer:'',
-    images:[]
+    pname:'Ice Coffee',
+    pdesc:'Coffee....',
+    price:4000
 }
 
 const ProductInput = () => {
 
     const fileRef = useRef()
-    const [board, setBoard] = useState({...initState})
+    const [product, setProduct] = useState({...initState})
 
     const handleChange = (e) => {
-        board[e.target.name] = e.target.value
-        setBoard({...board})
+        product[e.target.name] = e.target.value
+        setProduct({...product})
     }
 
     const handleClickSave = (e) => {
         const formData = new FormData()
 
-        formData.append("title", board.title)
-        formData.append("title", board.content)
-        formData.append("title", board.writer)
+        formData.append("pname", product.pname)
+        formData.append("pdesc", product.pdesc)
+        formData.append("price", product.price)
 
         console.dir(fileRef.current)
 
@@ -45,13 +44,13 @@ const ProductInput = () => {
         <div>
             <h1>Input</h1>
             <div>
-                <input type="text" name="title" value={board.title} onChange={handleChange}></input>
+                <input type="text" name="pname" value={product.pname} onChange={handleChange}></input>
             </div>
             <div>
-                <input type="text" name="content" value={board.content} onChange={handleChange}></input>
+                <input type="text" name="pdesc" value={product.pdesc} onChange={handleChange}></input>
             </div>
             <div>
-                <input type="text" name="writer" value={board.writer} onChange={handleChange}></input>
+                <input type="number" name="price" value={product.price} onChange={handleChange}></input>
             </div>
             <div>
                 <input type="file" name="images" ref={fileRef} onChange={handleChange} multiple></input>
